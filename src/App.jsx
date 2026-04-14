@@ -221,9 +221,12 @@ const GLOBAL_CSS = `
     .store-badges { flex-direction: column; align-items: center; }
     .hero-headline { font-size: 2.2rem !important; }
     .section-title { font-size: 1.8rem !important; }
-    .nav-links { display: none; }
-    * { max-width: 100%; }
-    .bento-card { grid-column: span 1 !important; grid-row: span 1 !important; }
+    
+    .desktop-only { display: none !important; }
+    .nav-container { padding: 12px 16px !important; }
+    .logo-text { font-size: 18px !important; }
+    .logo-icon { width: 32px !important; height: 32px !important; font-size: 16px !important; }
+    .nav-action-btn { padding: 6px 12px !important; font-size: 12px !important; }
   }
 `;
 
@@ -542,7 +545,7 @@ export default function BadalyLanding() {
       <style>{GLOBAL_CSS}</style>
 
       {/* ── NAVBAR ─────────────────────────── */}
-      <nav className="glass" style={{
+      <nav className="glass nav-container" style={{
         position: "sticky", top: 0, zIndex: 100,
         padding: "14px 5vw", display: "flex",
         justifyContent: "space-between", alignItems: "center",
@@ -551,7 +554,7 @@ export default function BadalyLanding() {
       }}>
         {/* Logo */}
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{
+          <div className="logo-icon" style={{
             width: 40, height: 40, background: "linear-gradient(135deg,#10B981,#059669)",
             borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center",
             fontSize: 20, color: "#fff", fontWeight: 900,
@@ -559,14 +562,14 @@ export default function BadalyLanding() {
           }}>
             📞
           </div>
-          <span style={{ fontWeight: 900, fontSize: 22, color: "var(--dark)", letterSpacing: lang === "en" ? "-.5px" : 0 }}>
+          <span className="logo-text" style={{ fontWeight: 900, fontSize: 22, color: "var(--dark)", letterSpacing: lang === "en" ? "-.5px" : 0 }}>
             {t.nav.logo}
           </span>
         </div>
 
-        {/* Nav links (hidden on mobile via CSS) */}
-        <div className="nav-links" style={{ display: "flex", gap: 32, fontSize: 14, fontWeight: 600, color: "var(--slate)" }}>
-          {t.nav.links.map((l) => (
+        {/* Nav links (Hidden on mobile via desktop-only class) */}
+        <div className="nav-links desktop-only" style={{ display: "flex", gap: 32, fontSize: 14, fontWeight: 600, color: "var(--slate)" }}>
+          {t.nav.links?.map((l) => (
             <span key={l} style={{ cursor: "pointer", transition: "color .2s" }}
               onMouseEnter={(e) => (e.target.style.color = "var(--green)")}
               onMouseLeave={(e) => (e.target.style.color = "var(--slate)")}>
@@ -577,10 +580,10 @@ export default function BadalyLanding() {
 
         {/* Actions */}
         <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-          <button className="btn-outline" onClick={toggleLang} style={{ padding: "8px 16px", fontSize: 13 }} aria-label={lang === "ar" ? "Switch to English" : "التبديل للعربية"}>
+          <button className="btn-outline nav-action-btn" onClick={toggleLang} style={{ padding: "8px 16px", fontSize: 13 }}>
             🌐 {t.nav.langToggle}
           </button>
-          <button className="btn-primary" style={{ padding: "10px 22px", fontSize: 14 }} aria-label={t.nav.download}>
+          <button className="btn-primary nav-action-btn" style={{ padding: "10px 22px", fontSize: 14 }}>
             <span style={{ position: "relative", zIndex: 1 }}>{t.nav.download}</span>
           </button>
         </div>
