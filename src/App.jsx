@@ -243,7 +243,7 @@ const CONTENT = {
       headlineLine2: "عيش حياتك",
       sub: "سيبه على الـ Hold وخلص مصلحتك",
       desc: "بدالي بيستنى عنك على الخط، بيتعامل مع قوائم الـ IVR، وبيصحيّك بس لما حد بشري يرد.",
-      cta: "جرّبه مجاناً",
+      cta: "جرب دلوقتي",
       ctaSub: "متاح على iOS, Android & Huawei",
       appHome: "الرئيسية",
       appSearch: "ابحث عن خدمة...",
@@ -319,7 +319,7 @@ const CONTENT = {
       headlineLine2: "Start Living",
       sub: "Let Badaly hold the line so you don't have to",
       desc: "Badaly navigates IVR menus, waits on hold, and alerts you the instant a human answers.",
-      cta: "Try for Free",
+      cta: "Preview Demo",
       ctaSub: "Available on iOS, Android & Huawei",
       appHome: "Home",
       appSearch: "Search for a service...",
@@ -651,7 +651,19 @@ export default function BadalyLanding() {
 
             {/* CTAs */}
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
-              <button className="btn-primary" style={{ fontSize: 16, padding: "16px 36px", borderRadius: 18 }} aria-label={t.hero.cta}>
+              <button 
+                className="btn-primary" 
+                style={{ fontSize: 16, padding: "16px 36px", borderRadius: 18 }} 
+                aria-label={t.hero.cta}
+                onClick={() => {
+                  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+                  if (isMobile) {
+                    window.location.href = 'new for pwa/badaly.html';
+                  } else {
+                    window.location.href = 'badaly-demo (2).html';
+                  }
+                }}
+              >
                 <span style={{ position: "relative", zIndex: 1 }}>🚀 {t.hero.cta}</span>
               </button>
               <div style={{ fontSize: 13, color: "var(--muted)", fontWeight: 600 }}>
