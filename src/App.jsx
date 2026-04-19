@@ -243,7 +243,7 @@ const CONTENT = {
       headlineLine2: "عيش حياتك",
       sub: "سيبه على الـ Hold وخلص مصلحتك",
       desc: "بدالي بيستنى عنك على الخط، بيتعامل مع قوائم الـ IVR، وبيصحيّك بس لما حد بشري يرد.",
-      cta: "جرب دلوقتي",
+      cta: "جربه مجاناً",
       ctaSub: "متاح على iOS, Android & Huawei",
       appHome: "الرئيسية",
       appSearch: "ابحث عن خدمة...",
@@ -319,7 +319,7 @@ const CONTENT = {
       headlineLine2: "Start Living",
       sub: "Let Badaly hold the line so you don't have to",
       desc: "Badaly navigates IVR menus, waits on hold, and alerts you the instant a human answers.",
-      cta: "Preview Demo",
+      cta: "Try for Free",
       ctaSub: "Available on iOS, Android & Huawei",
       appHome: "Home",
       appSearch: "Search for a service...",
@@ -540,6 +540,16 @@ export default function BadalyLanding() {
 
   const toggleLang = () => setLang((l) => (l === "ar" ? "en" : "ar"));
 
+  const handleDemoClick = () => {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+    const base = import.meta.env.BASE_URL;
+    if (isMobile) {
+      window.location.href = `${base}pwa/index.html`;
+    } else {
+      window.location.href = `${base}demo.html`;
+    }
+  };
+
   return (
     <div dir={t.dir} style={{ fontFamily: "'Cairo', sans-serif", color: "var(--dark)", overflowX: "hidden" }}>
       <style>{GLOBAL_CSS}</style>
@@ -583,7 +593,7 @@ export default function BadalyLanding() {
           <button className="btn-outline nav-action-btn" onClick={toggleLang} style={{ padding: "8px 16px", fontSize: 13 }}>
             🌐 {t.nav.langToggle}
           </button>
-          <button className="btn-primary nav-action-btn" style={{ padding: "10px 22px", fontSize: 14 }}>
+          <button className="btn-primary nav-action-btn" style={{ padding: "10px 22px", fontSize: 14 }} onClick={handleDemoClick}>
             <span style={{ position: "relative", zIndex: 1 }}>{t.nav.download}</span>
           </button>
         </div>
@@ -655,14 +665,7 @@ export default function BadalyLanding() {
                 className="btn-primary" 
                 style={{ fontSize: 16, padding: "16px 36px", borderRadius: 18 }} 
                 aria-label={t.hero.cta}
-                onClick={() => {
-                  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
-                  if (isMobile) {
-                    window.location.href = 'new for pwa/badaly.html';
-                  } else {
-                    window.location.href = 'badaly-demo (2).html';
-                  }
-                }}
+                onClick={handleDemoClick}
               >
                 <span style={{ position: "relative", zIndex: 1 }}>🚀 {t.hero.cta}</span>
               </button>
